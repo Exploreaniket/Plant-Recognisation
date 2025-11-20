@@ -1,0 +1,51 @@
+body {
+  background-color: #f5f6f8;
+}
+
+.card {
+  border-radius: 16px;
+}
+
+.active-tab {
+  border-bottom: 2px solid #2f9e44;
+  color: #2f9e44 !important;
+}
+
+.upload-dropzone {
+  border: 2px dashed #ced4da;
+  border-radius: 12px;
+  padding: 24px;
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.upload-dropzone:hover {
+  background-color: #f1f3f5;
+}
+
+.recent-thumb {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.recent-thumb {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
+.plant-card {
+  border-radius: 14px;
+  overflow: hidden;
+}
+.recent-list {
+  max-height: 260px;      /* adjust if you want more/less */
+  overflow-y: auto;
+}
+.recent-item:last-child {
+  margin-bottom: 0;
+}

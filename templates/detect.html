@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title">Plant Identification &amp; Analysis</h4>
+        <p class="text-muted">
+          Upload a photo of your plant to get instant identification, care recommendations,
+          and disease detection (demo).
+        </p>
+
+        <form id="upload-form">
+          <div class="mb-3">
+            <label class="form-label">Plant photo</label>
+            <input id="image-input" type="file" accept="image/*" class="form-control">
+          </div>
+
+          <div id="dropzone" class="upload-dropzone mb-3 text-center">
+            <p id="no-preview" class="text-muted mb-0">Click or drop an image here to upload</p>
+            <img id="preview" src="" class="img-fluid mt-2" style="display:none; max-height:260px;" alt="">
+          </div>
+
+          <div class="d-flex gap-2">
+  <button id="identify-btn" type="button" class="btn btn-success">
+    Identify
+  </button>
+  <button id="new-ident-btn" type="button" class="btn btn-outline-secondary">
+    Identify New Plant
+  </button>
+</div>
+
+        </form>
+
+        <div id="result-card" class="mt-4" style="display:none;">
+          <div class="card border-success">
+            <div class="card-body">
+              <h5 id="result-name" class="card-title mb-1"></h5>
+              <p id="result-confidence" class="text-success mb-3"></p>
+
+              <h6 class="mb-2">Care guide</h6>
+              <ul class="mb-0">
+                <li id="care-light"></li>
+                <li id="care-water"></li>
+                <li id="care-soil"></li>
+                <li id="care-notes"></li>
+              </ul>
+              <img id="result-image" src="" class="img-thumbnail mt-3" style="max-width:220px; display:none;" alt="">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h6 class="mb-3">Recent Plant Identifications</h6>
+        {% if history %}
+          {% for item in history %}
+            <div class="d-flex align-items-center mb-3">
+              <img src="{{ url_for('uploaded_file', filename=item.filename) }}"
+                   class="rounded me-3 recent-thumb">
+              <div>
+                <div class="fw-semibold">{{ item.common_name or item.plant_name }}</div>
+                <div class="text-muted small">{{ (item.confidence * 100)|round(0) }}% match</div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-muted small mb-0">No identifications yet. Upload a photo to get started.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/detect.js') }}"></script>
+{% endblock %}
